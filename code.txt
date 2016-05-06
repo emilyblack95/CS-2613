@@ -1,0 +1,121 @@
+/------------------------------INPUT------------------------------
+CIF1,	SKI  		/start of input
+	BUN CIF1 	/Loops if no input
+	INP	
+	ADD NZR
+	STA ONE
+CIF2, 	SKI 		/checks for second input 
+	BUN CIF2 	/Loops if no input
+	CLA
+	INP
+	ADD NZR
+	STA TWO  	/end of input
+	/------------------------------INPUT------------------------------
+	/------------------------------MULTIPLICATION------------------------------
+	LDA ONE
+	CIL
+	CLE
+	STA TMP 
+	LDA ONE
+	CIL		/times by 2
+	CIL
+	CIL
+	CLE
+	ADD TMP
+	ADD TWO  	/end of multiplication, one should have whole number now
+	/------------------------------MULTIPLICATION------------------------------
+	/------------------------------COUNTER------------------------------
+	STA TMP  	/copies one's value to TMP
+	LDA TMP
+	CIR
+	CLE
+	CMA
+	INC     	/negates it
+	STA TMP  /end of counter, tmp should have half of the input, but negative
+	/------------------------------COUNTER------------------------------
+	/------------------------------LOOP------------------------------
+LOP, 	LDA SUM		/start of adding loop
+	ADD ONC		/add 1,3,5,7,9....
+	STA SUM		/store sum
+	LDA ONC
+	ADD ONV		/add 1+2=3,3+2=5....
+	STA ONC		/store counter
+	ISZ TMP		/tmp being negative half of the value given
+	BUN LOP		/end of loop, SUM should have number.
+	/------------------------------LOOP------------------------------
+	/------------------------------OUTPUT------------------------------
+X,	LDA SUM       /start of 1000s
+	ADD THD    /-1000
+	STA SUM
+	SPA  /skip if positive
+	BUN Z
+	LDA CNT1
+	ADD FIR
+	STA CNT1
+	BUN X
+Z,	LDA SUM
+	ADD THS /1000
+	STA SUM
+	LDA CNT1
+	ADD PZR
+	OUT    /end of 1000s
+Y,	LDA SUM    /start of 100s
+	ADD HUD  /-100
+	STA SUM
+	SPA
+	BUN C
+	LDA CNT2
+	ADD FIR
+	STA CNT2
+	BUN Y
+C,	LDA SUM
+	ADD HUS  /100
+	STA SUM
+	LDA CNT2
+	ADD PZR
+	OUT  /end of 100s
+R,	LDA SUM   /start of 10s
+	ADD TED   /-10
+	STA SUM
+	SPA
+	BUN F
+	LDA CNT3
+	ADD FIR
+	STA CNT3
+	BUN R
+F,	LDA SUM
+	ADD TES  /10
+	STA SUM
+	LDA CNT3
+	ADD PZR
+	OUT    /end of 10s
+	LDA SUM  /start of 1s
+	ADD PZR
+	ADD NZR
+	ADD PZR
+	ADD NZR
+	ADD PZR
+	ADD NZR
+	ADD PZR
+	OUT  /end of 1s
+	/------------------------------OUTPUT------------------------------
+	HLT
+NZR, HEX -30
+PZR, HEX 30
+ONC, DEC 1 /this will start at 1, then have 2 added to it each time
+ONV, DEC 2 /this is what we will add to ONC everytime we go through the loop
+SUM, DEC 0
+TMP, DEC 0
+TWO, DEC 0
+ONE, DEC 0
+FIR, DEC 1
+THS, DEC 1000
+THD, DEC -1000
+HUS, DEC 100
+HUD, DEC -100
+TES, DEC 10
+TED, DEC -10
+CNT1, DEC 0
+CNT2, DEC 0
+CNT3, DEC 0
+END          /End of program
