@@ -6,3 +6,5 @@ undergraduates majoring in Computer Science. All of my code is original and from
 appropiate credit to the author (me). Thanks! :)
 
 The goal of this project was to take a number from 0-99 and add up all the odd numbers till you reach n, then output that number.
+
+Click branch to locate different projects.
